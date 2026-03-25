@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>WMS Theme Gallery</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&family=Pretendard:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --gallery-bg: #f3ede4;
+        --gallery-paper: rgba(255, 255, 255, 0.8);
+        --gallery-line: rgba(22, 22, 26, 0.1);
+        --gallery-line-strong: rgba(22, 22, 26, 0.16);
+        --gallery-ink: #16161a;
+        --gallery-muted: rgba(22, 22, 26, 0.66);
+        --gallery-accent: #c52d4e;
+        --gallery-accent-soft: #f2d8de;
+        --gallery-shadow: 0 24px 54px rgba(22, 22, 26, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        background:
+          radial-gradient(circle at 10% 0%, rgba(197, 45, 78, 0.12), transparent 22%),
+          radial-gradient(circle at 90% 8%, rgba(200, 160, 109, 0.12), transparent 26%),
+          var(--gallery-bg);
+        color: var(--gallery-ink);
+        font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .gallery-shell {
+        width: min(1480px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 40px 0 72px;
+      }
+
+      .gallery-head {
+        display: grid;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+
+      .gallery-kicker {
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gallery-accent);
+      }
+
+      .gallery-head h1 {
+        margin: 0;
+        max-width: 12ch;
+        font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+        font-size: clamp(2.8rem, 6vw, 5.4rem);
+        line-height: 0.92;
+        letter-spacing: -0.06em;
+      }
+
+      .gallery-head p {
+        margin: 0;
+        max-width: 860px;
+        color: var(--gallery-muted);
+        line-height: 1.75;
+      }
+
+      .gallery-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .gallery-nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 42px;
+        padding: 0 16px;
+        border: 1px solid var(--gallery-line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.64);
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 700;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .gallery-card {
+        display: grid;
+        grid-template-columns: 340px minmax(0, 1fr);
+        gap: 20px;
+        align-items: start;
+        padding: 18px;
+        border: 1px solid var(--gallery-line);
+        border-radius: 30px;
+        background: var(--gallery-paper);
+        backdrop-filter: blur(16px);
+        box-shadow: var(--gallery-shadow);
+      }
+
+      .gallery-copy {
+        position: sticky;
+        top: 18px;
+        display: grid;
+        gap: 12px;
+        padding: 10px 8px 6px;
+      }
+
+      .gallery-copy h2 {
+        margin: 0;
+        font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+        font-size: 1.9rem;
+        line-height: 1;
+        letter-spacing: -0.05em;
+      }
+
+      .gallery-label {
+        margin: 0;
+        font-size: 0.92rem;
+        font-weight: 800;
+        color: var(--gallery-accent);
+      }
+
+      .gallery-summary,
+      .gallery-reading {
+        margin: 0;
+        color: var(--gallery-muted);
+        line-height: 1.72;
+      }
+
+      .gallery-points {
+        display: grid;
+        gap: 8px;
+        margin-top: 2px;
+      }
+
+      .gallery-point {
+        padding: 10px 12px;
+        border: 1px solid var(--gallery-line);
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.52);
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+
+      .gallery-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 6px;
+      }
+
+      .gallery-actions a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 18px;
+        border: 1px solid var(--gallery-line-strong);
+        border-radius: 999px;
+        background: #ffffff;
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 800;
+      }
+
+      iframe {
+        width: 100%;
+        height: 980px;
+        border: 1px solid rgba(22, 22, 26, 0.08);
+        border-radius: 22px;
+        background: #fff;
+      }
+
+      @media (max-width: 1120px) {
+        .gallery-card {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-copy {
+          position: static;
+          padding: 4px 4px 0;
+        }
+
+        iframe {
+          height: 760px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .gallery-shell {
+          width: min(100% - 20px, 1480px);
+          padding-top: 28px;
+        }
+
+        .gallery-head h1 {
+          max-width: none;
+        }
+
+        .gallery-card {
+          padding: 14px;
+          border-radius: 22px;
+        }
+
+        iframe {
+          height: 620px;
+          border-radius: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="gallery-shell">
+      <section class="gallery-head">
+        <div class="gallery-kicker">WMS Theme Comparison</div>
+        <h1>일곱 가지 메인 방향을 한 페이지에서 바로 비교할 수 있게 정리했습니다.</h1>
+        <p>
+          이번 비교는 같은 WMS 브랜드를 서로 다른 방식으로 읽히게 만드는 일곱 가지 방향을 모아둔 버전입니다.
+          `wms-23`은 추상적 이펙트 중심, `wms-17`은 포토 시네마틱 중심, `wms-25`는 풀블리드 영상 히어로, `wms-26`은 프레임드 영상 히어로, `wms-27`은 희미한 배경형 영상, `wms-28`은 우측 상부 오프셋 영상, `wms-24`는 브랜드 홈 구조 중심입니다.
+          각 카드에서 해석 포인트를 먼저 보고, 오른쪽 프레임에서 실제 화면 흐름을 바로 확인할 수 있습니다.
+        </p>
+        <div class="gallery-nav">
+          <a href="#version-01">01 이펙트 히어로</a>
+          <a href="#version-02">02 포토 시네</a>
+          <a href="#version-03">03 비디오 히어로</a>
+          <a href="#version-04">04 비디오 프레임 테스트</a>
+          <a href="#version-05">05 소프트 백그라운드</a>
+          <a href="#version-06">06 오프셋 비디오</a>
+          <a href="#version-07">07 브랜드 홈</a>
+        </div>
+      </section>
+
+      <section class="gallery-grid">
+        <article class="gallery-card" id="version-01">
+          <div class="gallery-copy">
+            <div class="gallery-kicker">Version 01</div>
+            <h2>Hero Effect</h2>
+            <p class="gallery-label">추상적 브랜딩 / 선언형 무드</p>
+            <p class="gallery-summary">
+              빛, 밴드, 아크, 오브젝트 움직임으로 WMS의 리브랜딩 무드를 먼저 밀어붙이는 방향입니다.
+            </p>
+            <p class="gallery-reading">
+              “이 브랜드는 감도와 철학이 분명하다”는 인상이 가장 강하게 남고,
+              상대적으로 서비스 설명보다 브랜드 세계관이 먼저 읽힙니다.
+            </p>
+            <div class="gallery-points">
+              <div class="gallery-point">브랜드 해석: 여성 플레이어를 위한 상징적 선언문처럼 느껴짐</div>
+              <div class="gallery-point">정서: 고급스럽고 몰입감 있고, 패션 필름 같은 인상</div>
+              <div class="gallery-point">강점: 차별화된 첫인상, 브랜딩 힘이 강함</div>
+            </div>
+            <div class="gallery-actions">
+              <a href="./wms-version-01-hero-effect.html" target="_blank" rel="noreferrer">단독 보기</a>
+            </div>
+          </div>
+          <iframe
+            src="./wms-version-01-hero-effect.html"
+            title="WMS hero effect version"
+            loading="lazy"
+          ></iframe>
+        </article>
+
+        <article class="gallery-card" id="version-02">
+          <div class="gallery-copy">
+            <div class="gallery-kicker">Version 02</div>
+            <h2>Photo Cine</h2>
+            <p class="gallery-label">실사 히어로 / 캠페인형 랜딩</p>
+            <p class="gallery-summary">
+              실제 사진과 영화적인 줌, 런칭 배지, 큰 타이포로 WMS를 광고 캠페인처럼 보여주는 방향입니다.
+            </p>
+            <p class="gallery-reading">
+              “실제 사람이 이 안에서 스포츠를 시작한다”는 감각이 빨리 오고,
+              감성뿐 아니라 신청 가능한 랜딩 페이지처럼 읽히는 힘이 있습니다.
+            </p>
+            <div class="gallery-points">
+              <div class="gallery-point">브랜드 해석: 가장 대중적이고 전환 친화적인 WMS</div>
+              <div class="gallery-point">정서: 현실적이고 트렌디하고, 광고 비주얼 같은 인상</div>
+              <div class="gallery-point">강점: 이해 속도 빠름, 실제 서비스 감각이 선명함</div>
+            </div>
+            <div class="gallery-actions">
+              <a href="./wms-version-02-photo-cine.html" target="_blank" rel="noreferrer">단독 보기</a>
+            </div>
+          </div>
+          <iframe
+            src="./wms-version-02-photo-cine.html"
+            title="WMS photo cine version"
+            loading="lazy"
+          ></iframe>
+        </article>
+
+        <article class="gallery-card" id="version-03">
+          <div class="gallery-copy">
+            <div class="gallery-kicker">Version 03</div>
+            <h2>Video Hero</h2>
+            <p class="gallery-label">실사 영상 히어로 / 몰입형 오프닝</p>
+            <p class="gallery-summary">
+              주짓수 영상을 히어로 배경으로 재생해 첫 화면에서 움직임과 에너지 자체를 브랜드 무드로 쓰는 방향입니다.
+            </p>
+            <p class="gallery-reading">
+              정적인 사진보다 현장감이 빠르게 들어오고,
+              WMS를 더 살아 있는 스포츠 브랜드처럼 느끼게 만드는 타입입니다.
+            </p>
+            <div class="gallery-points">
+              <div class="gallery-point">브랜드 해석: 가장 몰입감 있고 캠페인 필름 같은 WMS</div>
+              <div class="gallery-point">정서: 현장감, 긴장감, 실제 움직임의 에너지</div>
+              <div class="gallery-point">강점: 첫 화면 체류감이 강하고 기억에 남기 쉬움</div>
+            </div>
+            <div class="gallery-actions">
+              <a href="./wms-version-03-video-hero.html" target="_blank" rel="noreferrer">단독 보기</a>
+            </div>
+          </div>
+          <iframe
+            src="./wms-version-03-video-hero.html"
+            title="WMS video hero version"
+            loading="lazy"
+          ></iframe>
+        </article>
+
+        <article class="gallery-card" id="version-04">
+          <div class="gallery-copy">
+            <div class="gallery-kicker">Version 04</div>
+            <h2>Video Hero Framed</h2>
+            <p class="gallery-label">선명도 우선 / 프레임드 영상 테스트</p>
+            <p class="gallery-summary">
+              같은 영상을 풀블리드로 늘리지 않고, 블러 배경과 별도의 메인 프레임으로 분리해 화질 저하를 줄이는 테스트 버전입니다.
+            </p>
+            <p class="gallery-reading">
+              히어로의 에너지는 유지하면서도 실제로 보여줘야 하는 움직임은 더 또렷하게 보이도록 조정한 타입입니다.
+            </p>
+            <div class="gallery-points">
+              <div class="gallery-point">브랜드 해석: 영상 무드는 유지하되 더 프리미엄하고 통제된 인상</div>
+              <div class="gallery-point">정서: 차분하지만 선명하고, 쇼케이스 같은 느낌</div>
+              <div class="gallery-point">강점: 원본 해상도를 덜 무리하게 써서 깨짐이 훨씬 덜 보일 가능성</div>
+            </div>
+            <div class="gallery-actions">
+              <a href="./wms-version-04-video-hero-framed.html" target="_blank" rel="noreferrer">단독 보기</a>
+            </div>
+          </div>
+          <iframe
+            src="./wms-version-04-video-hero-framed.html"
+            title="WMS video hero framed version"
+            loading="lazy"
+          ></iframe>
+        </article>
+
+        <article class="gallery-card" id="version-05">
+          <div class="gallery-copy">
+            <div class="gallery-kicker">Version 05</div>
+            <h2>Video Hero Soft</h2>
+            <p class="gallery-label">버전 03 변형 / 희미한 배경형</p>
+            <p class="gallery-summary">
+              전체적으로는 풀블리드 비디오 히어로를 유지하되, 영상이 전면으로 튀지 않게 더 흐리고 눌러서 브랜드 카피가 먼저 읽히게 만든 방향입니다.
+            </p>
+            <p class="gallery-reading">
+              영상 품질 이슈를 크게 드러내지 않으면서도, 움직임이 전체 무드로는 살아 있는 타입입니다.
+            </p>
+            <div class="gallery-points">
+              <div class="gallery-point">브랜드 해석: 영상은 배경, 메시지가 주인공인 히어로</div>
+              <div class="gallery-point">정서: 더 조용하고 세련된 런칭 무드</div>
+              <div class="gallery-point">강점: 낮은 해상도 자산도 상대적으로 자연스럽게 숨길 수 있음</div>
+            </div>
+            <div class="gallery-actions">
+              <a href="./wms-version-05-video-hero-soft.html" target="_blank" rel="noreferrer">단독 보기</a>
+            </div>
+          </div>
+          <iframe
+            src="./wms-version-05-video-hero-soft.html"
+            title="WMS video hero soft background version"
+            loading="lazy"
+          ></iframe>
+        </article>
+
+        <article class="gallery-card" id="version-06">
+          <div class="gallery-copy">
+            <div class="gallery-kicker">Version 06</div>
+            <h2>Video Hero Offset</h2>
+            <p class="gallery-label">버전 04 변형 / 우측 상부 배치형</p>
+            <p class="gallery-summary">
+              선명한 비디오는 유지하되, 별도 카드처럼 보이지 않게 테두리를 빼고 카피 레이아웃을 피해 우측 상단에 배치한 방향입니다.
+            </p>
+            <p class="gallery-reading">
+              브랜드 메시지가 중심을 잡고, 비디오는 시선을 한 번 더 머물게 하는 보조 장면처럼 작동합니다.
+            </p>
+            <div class="gallery-points">
+              <div class="gallery-point">브랜드 해석: 가장 실무적인 비디오 적용형 히어로</div>
+              <div class="gallery-point">정서: 정돈돼 있고, 광고 컷과 에디토리얼의 중간 느낌</div>
+              <div class="gallery-point">강점: 선명도와 레이아웃 안정성을 함께 가져가기 쉬움</div>
+            </div>
+            <div class="gallery-actions">
+              <a href="./wms-version-06-video-hero-offset.html" target="_blank" rel="noreferrer">단독 보기</a>
+            </div>
+          </div>
+          <iframe
+            src="./wms-version-06-video-hero-offset.html"
+            title="WMS video hero offset version"
+            loading="lazy"
+          ></iframe>
+        </article>
+
+        <article class="gallery-card" id="version-07">
+          <div class="gallery-copy">
+            <div class="gallery-kicker">Version 07</div>
+            <h2>Brand Home</h2>
+            <p class="gallery-label">에디토리얼 구조 / 메인 홈페이지형</p>
+            <p class="gallery-summary">
+              히어로 이후에 정의, 변화, 경로, 종목, 시작 방식, 지속 구조를 차근차근 보여주는 브랜드 홈 방향입니다.
+            </p>
+            <p class="gallery-reading">
+              “WMS는 운동 클래스가 아니라 내 스포츠를 만들게 돕는 브랜드”라는 이해가 가장 안정적으로 쌓이고,
+              오래 읽히는 신뢰감이 강합니다.
+            </p>
+            <div class="gallery-points">
+              <div class="gallery-point">브랜드 해석: 가장 구조화된 브랜드 소개, 메인 홈에 가까움</div>
+              <div class="gallery-point">정서: 성숙하고 단정하고, 라이프스타일 브랜드 같은 인상</div>
+              <div class="gallery-point">강점: 메시지 정리가 좋고 WMS 철학을 이해시키기 쉬움</div>
+            </div>
+            <div class="gallery-actions">
+              <a href="./wms-version-07-brand-home.html" target="_blank" rel="noreferrer">단독 보기</a>
+            </div>
+          </div>
+          <iframe
+            src="./wms-version-07-brand-home.html"
+            title="WMS brand home version"
+            loading="lazy"
+          ></iframe>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

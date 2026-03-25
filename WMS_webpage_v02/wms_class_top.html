@@ -12,15 +12,15 @@
 }
 
 #wms-class-top {
-  --wms-red: #c4284a;
-  --wms-bg: #080808;
-  --wms-bg2: #111111;
-  --wms-line: rgba(255,255,255,.08);
-  --wms-text-dim: rgba(255,255,255,.35);
-  --wms-text-faint: rgba(255,255,255,.22);
+  --wms-red: #67A8FF;
+  --wms-bg: #F8F6F2;
+  --wms-bg2: rgba(255,255,255,.72);
+  --wms-line: rgba(31,33,39,.08);
+  --wms-text-dim: rgba(31,33,39,.35);
+  --wms-text-faint: rgba(31,33,39,.22);
   --wms-header-offset: 72px;
   margin: 0;
-  color: #fff;
+  color: #1F2127;
   background: transparent;
   font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   line-height: 1.5;
@@ -55,8 +55,8 @@
 #wms-class-top #wms-class-hero {
   padding: 104px 0 72px;
   background:
-    radial-gradient(ellipse 55% 65% at 10% 55%, rgba(122,26,46,.22) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 45% at 90% 20%, rgba(60,6,18,.28) 0%, transparent 50%),
+    radial-gradient(ellipse 55% 65% at 10% 55%, rgba(103,168,255,.18) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 45% at 90% 20%, rgba(142,92,255,.14) 0%, transparent 50%),
     var(--wms-bg);
   position: relative;
   overflow: hidden;
@@ -68,8 +68,8 @@
   inset: 0;
   opacity: .018;
   background-image:
-    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    linear-gradient(rgba(31,33,39,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31,33,39,.06) 1px, transparent 1px);
   background-size: 120px 120px;
   pointer-events: none;
 }
@@ -107,7 +107,7 @@
   font-weight: 700;
   line-height: .94;
   letter-spacing: -.06em;
-  color: #fff;
+  color: #1F2127;
 }
 
 #wms-class-top .wms-cl-h em {
@@ -128,7 +128,7 @@
   flex-direction: column;
   gap: 14px;
   padding-left: 40px;
-  border-left: .5px solid rgba(255,255,255,.10);
+  border-left: .5px solid rgba(31,33,39,.10);
   flex-shrink: 0;
 }
 
@@ -138,7 +138,7 @@
   font-size: 52px;
   line-height: 1;
   letter-spacing: .02em;
-  color: #fff;
+  color: #1F2127;
 }
 
 #wms-class-top .wms-cl-stat-num span {
@@ -151,7 +151,7 @@
   font-size: 10px;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.25);
+  color: rgba(31,33,39,.25);
 }
 
 /* ── 종목 필터 탭 ── */
@@ -159,7 +159,7 @@
   position: sticky;
   top: var(--wms-header-offset);
   z-index: 20;
-  background: rgba(8,8,8,.95);
+  background: rgba(255,253,249,.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: .5px solid var(--wms-line);
@@ -182,7 +182,7 @@
   border: 0;
   border-bottom: 1.5px solid transparent;
   background: transparent;
-  color: rgba(255,255,255,.32);
+  color: rgba(31,33,39,.32);
   cursor: pointer;
   white-space: nowrap;
   font-size: 12px;
@@ -192,11 +192,11 @@
 }
 
 #wms-class-top .wms-ftab:hover {
-  color: rgba(255,255,255,.65);
+  color: rgba(31,33,39,.65);
 }
 
 #wms-class-top .wms-ftab.on {
-  color: #fff;
+  color: #1F2127;
   border-bottom-color: var(--wms-red);
 }
 
@@ -204,7 +204,7 @@
 #wms-class-top #wms-class-sports {
   padding: 64px 0;
   background: var(--wms-bg);
-  border-bottom: .5px solid rgba(255,255,255,.07);
+  border-bottom: .5px solid rgba(31,33,39,.07);
 }
 
 #wms-class-top .wms-sport-grid {
@@ -217,7 +217,7 @@
   display: block;
   min-height: 100%;
   padding: 22px 20px;
-  border: .5px solid rgba(255,255,255,.09);
+  border: .5px solid rgba(31,33,39,.09);
   border-radius: 14px;
   background: var(--wms-bg2);
   color: inherit;
@@ -228,7 +228,7 @@
 }
 
 #wms-class-top .wms-sport-card:hover {
-  border-color: rgba(196,40,74,.4);
+  border-color: rgba(103,168,255,.4);
   transform: translateY(-3px);
 }
 
@@ -275,14 +275,14 @@
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -.04em;
-  color: #fff;
+  color: #1F2127;
 }
 
 #wms-class-top .wms-sport-desc {
   margin: 0 0 12px;
   font-size: 13px;
   line-height: 1.65;
-  color: rgba(255,255,255,.36);
+  color: rgba(31,33,39,.36);
 }
 
 #wms-class-top .wms-sport-badges {
@@ -294,10 +294,10 @@
 #wms-class-top .wms-sport-badge {
   display: inline-block;
   padding: 3px 9px;
-  border: .5px solid rgba(196,40,74,.2);
+  border: .5px solid rgba(103,168,255,.2);
   border-radius: 10px;
-  background: rgba(196,40,74,.10);
-  color: rgba(196,40,74,.78);
+  background: rgba(103,168,255,.10);
+  color: rgba(103,168,255,.78);
   font-size: 9px;
   font-weight: 600;
   letter-spacing: .08em;
@@ -307,8 +307,8 @@
 /* ── 전체 클래스 헤더 (쇼핑 위) ── */
 #wms-class-top #wms-class-list-header {
   padding: 32px 0 20px;
-  background: #0d0d0d;
-  border-top: .5px solid rgba(255,255,255,.07);
+  background: rgba(255,255,255,.78);
+  border-top: .5px solid rgba(31,33,39,.07);
 }
 
 #wms-class-top .wms-cl-list-inner {
@@ -324,7 +324,7 @@
   font-size: clamp(22px, 3vw, 30px);
   font-weight: 700;
   letter-spacing: -.04em;
-  color: #fff;
+  color: #1F2127;
 }
 
 #wms-class-top .wms-cl-sort {
@@ -335,19 +335,19 @@
 
 #wms-class-top .wms-cl-sort-btn {
   padding: 5px 13px;
-  border: .5px solid rgba(255,255,255,.10);
+  border: .5px solid rgba(31,33,39,.10);
   border-radius: 10px;
   background: transparent;
-  color: rgba(255,255,255,.30);
+  color: rgba(31,33,39,.30);
   cursor: pointer;
   font-size: 11px;
   transition: all .2s;
 }
 
 #wms-class-top .wms-cl-sort-btn.on {
-  background: rgba(196,40,74,.12);
-  border-color: rgba(196,40,74,.4);
-  color: rgba(196,40,74,.85);
+  background: rgba(103,168,255,.12);
+  border-color: rgba(103,168,255,.4);
+  color: rgba(103,168,255,.85);
 }
 
 /* ── reveal 애니메이션 ── */
@@ -391,7 +391,7 @@
     padding-left: 0;
     padding-top: 16px;
     border-left: 0;
-    border-top: .5px solid rgba(255,255,255,.10);
+    border-top: .5px solid rgba(31,33,39,.10);
   }
 
   #wms-class-top .wms-sport-grid {

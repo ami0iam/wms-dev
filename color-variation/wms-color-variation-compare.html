@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WMS Color Variation Compare</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --panel: #ffffff;
+      --panel-2: #f6f7fb;
+      --line: rgba(18, 23, 34, .08);
+      --text: #14161c;
+      --muted: rgba(20, 22, 28, .56);
+      --accent: #d23a5d;
+      --shadow: 0 20px 50px rgba(19, 21, 28, .08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(180deg, #ffffff 0%, #f8f9fc 100%);
+      color: var(--text);
+      font-family: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    }
+
+    body {
+      padding: 20px 16px 64px;
+    }
+
+    .shell {
+      width: min(100%, 1920px);
+      margin: 0 auto;
+    }
+
+    .hero {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: .95;
+      letter-spacing: -.05em;
+    }
+
+    .sub {
+      max-width: 760px;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .quick-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .quick-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      text-decoration: none;
+      background: #ffffff;
+    }
+
+    .section {
+      margin-top: 40px;
+    }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 34px);
+      letter-spacing: -.04em;
+    }
+
+    .section-desc {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .label-wrap {
+      min-width: 0;
+    }
+
+    .kicker {
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .name {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: -.03em;
+    }
+
+    .open-link {
+      flex-shrink: 0;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .frame-wrap {
+      background: #eef1f7;
+      padding: 14px;
+    }
+
+    .frame-shell {
+      position: relative;
+      height: min(72vh, 860px);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.06);
+      background: #ffffff;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+      background: #fff;
+    }
+
+    @media (max-width: 1200px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .card-top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .frame-shell {
+        height: 56vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="hero">
+      <div class="eyebrow">WMS · Color Variation</div>
+      <h1>밝은 버전 / 어두운 버전을<br>한 번에 비교하기</h1>
+      <div class="sub">`color-variation` 폴더 안의 미리보기 HTML을 한 페이지에서 동시에 볼 수 있게 정리한 비교용 보드입니다. `01-03, 06`은 밝은 버전으로, `07-13`은 어두운 버전으로 묶었습니다.</div>
+      <nav class="quick-nav">
+        <a href="#light">밝은 버전 4개</a>
+        <a href="#dark">어두운 버전 7개</a>
+        <a href="#v02-main-remix">v02 메인 x 히어로 2개</a>
+        <a href="#hero-variants">히어로 변형 6개</a>
+      </nav>
+    </header>
+
+    <section class="section" id="light">
+      <div class="section-head">
+        <h2 class="section-title">밝은 버전</h2>
+        <div class="section-desc">01, 02, 03, 06</div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">01</div>
+              <h3 class="name">Apple Watch Series 11</h3>
+            </div>
+            <a class="open-link" href="./wms-01-apple-watch-series-11-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-01-apple-watch-series-11-preview.html" title="01 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">02</div>
+              <h3 class="name">Easy Use</h3>
+            </div>
+            <a class="open-link" href="./wms-02-easy-use-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-02-easy-use-preview.html" title="02 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">03</div>
+              <h3 class="name">Education</h3>
+            </div>
+            <a class="open-link" href="./wms-03-education-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-03-education-preview.html" title="03 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">06</div>
+              <h3 class="name">Breaking Barriers</h3>
+            </div>
+            <a class="open-link" href="./wms-06-breaking-barriers-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-06-breaking-barriers-preview.html" title="06 preview" loading="lazy"></iframe></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="dark">
+      <div class="section-head">
+        <h2 class="section-title">어두운 버전</h2>
+        <div class="section-desc">07, 08, 09, 10, 11, 12, 13</div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">07</div>
+              <h3 class="name">Soccer Dashboard</h3>
+            </div>
+            <a class="open-link" href="./wms-07-soccer-dashboard-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-07-soccer-dashboard-preview.html" title="07 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">08</div>
+              <h3 class="name">Soccer Dashboard Blue</h3>
+            </div>
+            <a class="open-link" href="./wms-08-soccer-dashboard-blue-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-08-soccer-dashboard-blue-preview.html" title="08 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">09</div>
+              <h3 class="name">Soccer Dashboard Volt</h3>
+            </div>
+            <a class="open-link" href="./wms-09-soccer-dashboard-volt-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-09-soccer-dashboard-volt-preview.html" title="09 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">10</div>
+              <h3 class="name">Soccer Dashboard Orange</h3>
+            </div>
+            <a class="open-link" href="./wms-10-soccer-dashboard-orange-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-10-soccer-dashboard-orange-preview.html" title="10 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">11</div>
+              <h3 class="name">Soccer Dashboard Yellow</h3>
+            </div>
+            <a class="open-link" href="./wms-11-soccer-dashboard-yellow-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-11-soccer-dashboard-yellow-preview.html" title="11 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">12</div>
+              <h3 class="name">Soccer Dashboard Red</h3>
+            </div>
+            <a class="open-link" href="./wms-12-soccer-dashboard-red-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-12-soccer-dashboard-red-preview.html" title="12 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">13</div>
+              <h3 class="name">Soccer Dashboard Red Photo</h3>
+            </div>
+            <a class="open-link" href="./wms-13-soccer-dashboard-red-photo-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-13-soccer-dashboard-red-photo-preview.html" title="13 preview" loading="lazy"></iframe></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="v02-main-remix">
+      <div class="section-head">
+        <h2 class="section-title">v02 메인 x 히어로 변형</h2>
+        <div class="section-desc">현재 v02 메인 콘텐츠 유지, 히어로 배경만 V01 / V03 스타일 적용</div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">R01</div>
+              <h3 class="name">v02 Main + V01 Hero Effect</h3>
+            </div>
+            <a class="open-link" href="./wms-v02-main-v01-hero-exact-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-v02-main-v01-hero-exact-preview.html" title="v02 main v01 hero remix" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">R02</div>
+              <h3 class="name">v02 Main + V03 Video Hero</h3>
+            </div>
+            <a class="open-link" href="./wms-v02-main-v03-hero-preview.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="./wms-v02-main-v03-hero-preview.html" title="v02 main v03 hero remix" loading="lazy"></iframe></div></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="hero-variants">
+      <div class="section-head">
+        <h2 class="section-title">히어로 변형</h2>
+        <div class="section-desc">version 01, 02, 03, 04, 05, 06</div>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">V01</div>
+              <h3 class="name">Hero Effect</h3>
+            </div>
+            <a class="open-link" href="../version/wms-version-01-hero-effect.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="../version/wms-version-01-hero-effect.html" title="version 01 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">V02</div>
+              <h3 class="name">Photo Cine</h3>
+            </div>
+            <a class="open-link" href="../version/wms-version-02-photo-cine.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="../version/wms-version-02-photo-cine.html" title="version 02 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">V03</div>
+              <h3 class="name">Video Hero</h3>
+            </div>
+            <a class="open-link" href="../version/wms-version-03-video-hero.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="../version/wms-version-03-video-hero.html" title="version 03 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">V04</div>
+              <h3 class="name">Video Hero Framed</h3>
+            </div>
+            <a class="open-link" href="../version/wms-version-04-video-hero-framed.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="../version/wms-version-04-video-hero-framed.html" title="version 04 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">V05</div>
+              <h3 class="name">Video Hero Soft</h3>
+            </div>
+            <a class="open-link" href="../version/wms-version-05-video-hero-soft.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="../version/wms-version-05-video-hero-soft.html" title="version 05 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <div class="label-wrap">
+              <div class="kicker">V06</div>
+              <h3 class="name">Video Hero Offset</h3>
+            </div>
+            <a class="open-link" href="../version/wms-version-06-video-hero-offset.html" target="_blank" rel="noreferrer">새 창에서 보기</a>
+          </div>
+          <div class="frame-wrap"><div class="frame-shell"><iframe src="../version/wms-version-06-video-hero-offset.html" title="version 06 preview" loading="lazy"></iframe></div></div>
+        </article>
+
+      </div>
+    </section>
+  </div>
+</body>
+</html>

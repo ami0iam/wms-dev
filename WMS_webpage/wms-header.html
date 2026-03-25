@@ -1,0 +1,103 @@
+<!-- WMS 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Bebas+Neue&family=Pretendard:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --wms-red: #c4284a;
+  --wms-bg: #080808;
+  --wms-bg2: #111111;
+}
+
+/* ── Nav 배경 — 실제 아임웹 클래스명 기준 ── */
+#doz_header_wrap,
+#doz_header,
+.new_org_header,
+#inline_header_normal {
+  background: rgba(8,8,8,.96) !important;
+  border-bottom: 0.5px solid rgba(255,255,255,.08) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  transition: background .3s, border-color .3s !important;
+}
+
+/* 스크롤 전 투명 */
+#doz_header_wrap.wms-top,
+#inline_header_normal.wms-top {
+  background: transparent !important;
+  border-bottom-color: transparent !important;
+}
+
+/* ── 로고 ── */
+#doz_header .logo,
+#doz_header .logo a,
+#doz_header .site-name,
+#doz_header .site-name a,
+.new_org_header .logo,
+.new_org_header .logo a {
+  font-family: 'Bebas Neue', sans-serif !important;
+  color: #c4284a !important;
+  font-size: 22px !important;
+  letter-spacing: .08em !important;
+  text-decoration: none !important;
+}
+
+/* ── 메뉴 링크 ── */
+#doz_header nav a,
+#doz_header .gnb a,
+.new_org_header nav a,
+.new_org_header .gnb a,
+#inline_header_normal a {
+  color: rgba(255,255,255,.45) !important;
+  font-family: 'Pretendard', sans-serif !important;
+  font-size: 12px !important;
+  letter-spacing: .05em !important;
+  text-transform: uppercase !important;
+  transition: color .2s !important;
+}
+#doz_header nav a:hover,
+#doz_header .gnb a:hover,
+.new_org_header nav a:hover,
+#inline_header_normal a:hover {
+  color: rgba(255,255,255,.85) !important;
+}
+
+/* ── 로그인 ── */
+#doz_header a[href*="login"],
+.new_org_header a[href*="login"] {
+  color: rgba(255,255,255,.4) !important;
+}
+
+/* ── 공지바 ── */
+.first_scroll_fixed.tansparent_bg,
+#inline_header_normal .inline-section-wrap {
+  background: rgba(8,8,8,.96) !important;
+}
+</style>
+
+<script>
+(function() {
+  function updateNav() {
+    var targets = [
+      document.getElementById('doz_header_wrap'),
+      document.getElementById('inline_header_normal'),
+      document.querySelector('.new_org_header')
+    ];
+    targets.forEach(function(el) {
+      if (!el) return;
+      if (window.scrollY < 10) {
+        el.classList.add('wms-top');
+        el.classList.remove('wms-scrolled');
+      } else {
+        el.classList.remove('wms-top');
+        el.classList.add('wms-scrolled');
+      }
+    });
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateNav);
+  } else {
+    updateNav();
+  }
+})();
+</script>

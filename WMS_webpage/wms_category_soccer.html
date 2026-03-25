@@ -1,0 +1,471 @@
+<!-- ================================================================
+  WMS 종목 페이지 (축구) — 아임웹 코드 위젯
+  사용법:
+  1. 아임웹 종목 카테고리 페이지 편집
+  2. 상단에 코드 위젯 추가 → 이 코드 전체 붙여넣기
+  3. 메뉴/카테고리 섹션, 쇼핑 기획전 섹션은 그대로 유지
+  4. 종목 변경 시: SPORT 값만 수정
+================================================================ -->
+
+<style>
+#wms-category-page,
+#wms-category-page *,
+#wms-category-page *::before,
+#wms-category-page *::after {
+  box-sizing: border-box;
+}
+
+#wms-category-page {
+  --wms-red: #c4284a;
+  --wms-bg: #080808;
+  --wms-bg2: #111111;
+  --wms-line: rgba(255,255,255,.08);
+  margin: 0;
+  color: #fff;
+  background: transparent;
+  font-family: 'Pretendard', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+#wms-category-page a,
+#wms-category-page button {
+  font: inherit;
+}
+
+#wms-category-page .wms-cat-shell {
+  width: min(100%, 1080px);
+  margin: 0 auto;
+  padding-left: clamp(20px, 4vw, 48px);
+  padding-right: clamp(20px, 4vw, 48px);
+}
+
+#wms-category-page .wms-cat-shell > *,
+#wms-category-page .wms-cat-inner > *,
+#wms-category-page .wms-step-detail > * {
+  min-width: 0;
+}
+
+/* ── 히어로 ── */
+#wms-category-page #wms-cat-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 104px 0 64px;
+  background:
+    radial-gradient(ellipse 60% 70% at 5% 55%, rgba(122,26,46,.28) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 50% at 92% 20%, rgba(60,6,18,.3) 0%, transparent 50%),
+    var(--wms-bg);
+}
+
+#wms-category-page #wms-cat-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: .018;
+  background-image:
+    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 120px 120px;
+  pointer-events: none;
+}
+
+#wms-category-page .wms-cat-backdrop {
+  position: absolute;
+  right: max(12px, 2vw);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Bebas Neue', 'Impact', sans-serif;
+  font-size: clamp(92px, 15vw, 172px);
+  line-height: .85;
+  letter-spacing: .02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,.04);
+  user-select: none;
+  pointer-events: none;
+}
+
+#wms-category-page .wms-cat-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+  align-items: end;
+  gap: clamp(24px, 4vw, 48px);
+}
+
+#wms-category-page .wms-cat-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  font-size: 10px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+}
+
+#wms-category-page .wms-cat-eyebrow::before {
+  content: '';
+  display: block;
+  width: 18px;
+  height: .5px;
+  background: var(--wms-red);
+}
+
+#wms-category-page .wms-cat-h {
+  margin: 0;
+  font-size: clamp(56px, 9vw, 96px);
+  font-weight: 700;
+  line-height: .92;
+  letter-spacing: -.06em;
+  color: #fff;
+}
+
+#wms-category-page .wms-cat-tagline {
+  justify-self: end;
+  max-width: 320px;
+  font-size: clamp(18px, 2vw, 28px);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -.03em;
+  color: rgba(196,40,74,.82);
+  text-align: right;
+}
+
+/* ── 레벨 여정 ── */
+#wms-category-page #wms-cat-journey {
+  background: var(--wms-bg);
+  padding: 48px 0 56px;
+  border-bottom: .5px solid var(--wms-line);
+}
+
+#wms-category-page .wms-journey-lbl {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 22px;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.22);
+}
+
+#wms-category-page .wms-journey-lbl::before {
+  content: '';
+  display: block;
+  width: 14px;
+  height: .5px;
+  background: rgba(196,40,74,.5);
+}
+
+#wms-category-page .wms-steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+#wms-category-page .wms-steps::before {
+  content: '';
+  position: absolute;
+  top: 19px;
+  left: 10%;
+  right: 10%;
+  height: .5px;
+  background: linear-gradient(to right, rgba(196,40,74,.5), rgba(196,40,74,.12));
+  z-index: 0;
+}
+
+#wms-category-page .wms-step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+#wms-category-page .wms-step-dot {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #111;
+  border: .5px solid rgba(196,40,74,.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(196,40,74,.5);
+  transition: all .2s;
+}
+
+#wms-category-page .wms-step:hover .wms-step-dot,
+#wms-category-page .wms-step.on .wms-step-dot {
+  background: rgba(196,40,74,.18);
+  border-color: rgba(196,40,74,.6);
+  color: #fff;
+}
+
+#wms-category-page .wms-step-name {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: center;
+  color: rgba(255,255,255,.4);
+  transition: color .2s;
+}
+
+#wms-category-page .wms-step:hover .wms-step-name,
+#wms-category-page .wms-step.on .wms-step-name {
+  color: rgba(255,255,255,.92);
+}
+
+#wms-category-page .wms-step-sub {
+  font-size: 9px;
+  text-align: center;
+  color: rgba(255,255,255,.22);
+}
+
+#wms-category-page .wms-step-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 20px;
+  border: .5px solid rgba(196,40,74,.22);
+  border-radius: 12px;
+  background: #111;
+}
+
+#wms-category-page .wms-step-badge {
+  flex-shrink: 0;
+  margin-top: 2px;
+  padding: 4px 10px;
+  border: .5px solid rgba(196,40,74,.25);
+  border-radius: 10px;
+  background: rgba(196,40,74,.12);
+  color: rgba(196,40,74,.8);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+#wms-category-page .wms-step-detail-name {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+#wms-category-page .wms-step-detail-desc {
+  font-size: 12px;
+  line-height: 1.65;
+  color: rgba(255,255,255,.38);
+}
+
+/* ── 클래스 목록 헤더 ── */
+#wms-category-page #wms-cat-list-header {
+  padding: 32px 0 20px;
+  background: #111;
+  border-bottom: .5px solid rgba(255,255,255,.07);
+}
+
+#wms-category-page .wms-list-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+#wms-category-page .wms-list-h {
+  margin: 0;
+  font-size: clamp(20px, 2.8vw, 26px);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  color: #fff;
+}
+
+#wms-category-page .wms-sort {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+#wms-category-page .wms-sort-btn {
+  padding: 5px 13px;
+  border: .5px solid rgba(255,255,255,.1);
+  border-radius: 10px;
+  background: transparent;
+  color: rgba(255,255,255,.3);
+  cursor: pointer;
+  font-size: 11px;
+  transition: all .2s;
+}
+
+#wms-category-page .wms-sort-btn:hover {
+  border-color: rgba(196,40,74,.4);
+  color: rgba(196,40,74,.8);
+}
+
+#wms-category-page .wms-sort-btn.on {
+  background: rgba(196,40,74,.12);
+  border-color: rgba(196,40,74,.45);
+  color: rgba(196,40,74,.9);
+}
+
+@media (max-width: 900px) {
+  #wms-category-page #wms-cat-hero {
+    padding: 84px 0 48px;
+  }
+
+  #wms-category-page .wms-cat-inner {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  #wms-category-page .wms-cat-tagline {
+    justify-self: start;
+    text-align: left;
+  }
+
+  #wms-category-page .wms-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  #wms-category-page .wms-steps::before {
+    left: 14%;
+    right: 14%;
+  }
+}
+
+@media (max-width: 640px) {
+  #wms-category-page .wms-cat-backdrop {
+    font-size: clamp(72px, 22vw, 100px);
+    right: -5px;
+  }
+
+  #wms-category-page .wms-steps {
+    gap: 8px;
+  }
+
+  #wms-category-page .wms-step-sub {
+    display: none;
+  }
+
+  #wms-category-page .wms-step-detail {
+    flex-direction: column;
+  }
+
+  #wms-category-page .wms-list-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+</style>
+
+<div id="wms-category-page">
+  <section id="wms-cat-hero">
+    <div class="wms-cat-backdrop" id="wms-cat-backdrop">BBALL</div>
+    <div class="wms-cat-shell">
+      <div class="wms-cat-inner">
+        <div>
+          <div class="wms-cat-eyebrow">WMS · 클래스</div>
+          <h1 class="wms-cat-h" id="wms-cat-title">축구</h1>
+        </div>
+        <div class="wms-cat-tagline" id="wms-cat-tagline">처음 공을 잡는 순간부터<br>팀의 일원이 되기까지</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="wms-cat-journey">
+    <div class="wms-cat-shell">
+      <div class="wms-journey-lbl" id="wms-journey-lbl">나의 축구 여정</div>
+      <div class="wms-steps" id="wms-steps"></div>
+      <div class="wms-step-detail" id="wms-step-detail">
+        <span class="wms-step-badge" id="wms-detail-badge">PLAY ON</span>
+        <div>
+          <div class="wms-step-detail-name" id="wms-detail-name">첫 수업 필수</div>
+          <div class="wms-step-detail-desc" id="wms-detail-desc">축구가 처음이라면 여기서 시작해요. 룰도 장비도 없이 코트에 서는 것만으로 충분해요.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script>
+(function() {
+  var root = document.getElementById('wms-category-page');
+  if (!root) return;
+
+  var SPORT = {
+    name: '축구',
+    backdrop: 'BBALL',
+    tagline: '처음 공을 잡는 순간부터<br>팀의 일원이 되기까지',
+    journeyLabel: '나의 축구 여정',
+    steps: [
+      { code: 'PO', name: 'PLAY ON', sub: '첫 수업 필수', desc: '축구가 처음이라면 여기서 시작해요. 룰도 장비도 없이 코트에 서는 것만으로 충분해요.' },
+      { code: 'RK', name: '루키즈', sub: '기초 입문', desc: '드리블, 패스, 슛 기초 동작을 배우는 단계예요. 축구를 처음 배우고 싶은 분이라면 여기서 시작해요.' },
+      { code: 'BR', name: '브릿지', sub: '기초→실전', desc: '루키즈를 수료하고 실전 기술로 넘어가는 단계예요. 기초와 실전 사이의 연결고리 역할을 해요.' },
+      { code: 'BA', name: '볼러스', sub: '실전 기술', desc: '기본기를 갖추고 게임에서 쓰는 실전 기술을 배우는 단계예요. 본격적인 축구가 여기서 시작돼요.' },
+      { code: 'SY', name: '시너지', sub: '팀 전술', desc: '팀 움직임과 전술 중심의 단계예요. 함께 뛰는 축구의 진짜 재미를 경험하게 돼요.' }
+    ]
+  };
+
+  var titleEl = root.querySelector('#wms-cat-title');
+  var backdropEl = root.querySelector('#wms-cat-backdrop');
+  var taglineEl = root.querySelector('#wms-cat-tagline');
+  var journeyLabelEl = root.querySelector('#wms-journey-lbl');
+
+  if (titleEl) titleEl.textContent = SPORT.name;
+  if (backdropEl) backdropEl.textContent = SPORT.backdrop;
+  if (taglineEl) taglineEl.innerHTML = SPORT.tagline;
+  if (journeyLabelEl) journeyLabelEl.textContent = SPORT.journeyLabel;
+
+  var stepsEl = root.querySelector('#wms-steps');
+  var badgeEl = root.querySelector('#wms-detail-badge');
+  var detailNameEl = root.querySelector('#wms-detail-name');
+  var detailDescEl = root.querySelector('#wms-detail-desc');
+
+  function renderDetail(step) {
+    if (badgeEl) badgeEl.textContent = step.name;
+    if (detailNameEl) detailNameEl.textContent = step.sub;
+    if (detailDescEl) detailDescEl.textContent = step.desc;
+  }
+
+  if (stepsEl) {
+    stepsEl.innerHTML = SPORT.steps.map(function(step, index) {
+      return '<div class="wms-step' + (index === 0 ? ' on' : '') + '" data-i="' + index + '">' +
+        '<div class="wms-step-dot">' + step.code + '</div>' +
+        '<div class="wms-step-name">' + step.name + '</div>' +
+        '<div class="wms-step-sub">' + step.sub + '</div>' +
+      '</div>';
+    }).join('');
+
+    renderDetail(SPORT.steps[0]);
+
+    stepsEl.addEventListener('click', function(event) {
+      var stepEl = event.target.closest('.wms-step');
+      if (!stepEl) return;
+      var index = parseInt(stepEl.getAttribute('data-i'), 10);
+      stepsEl.querySelectorAll('.wms-step').forEach(function(item) {
+        item.classList.remove('on');
+      });
+      stepEl.classList.add('on');
+      renderDetail(SPORT.steps[index]);
+    });
+  }
+
+  var sortButtons = root.querySelectorAll('.wms-sort-btn');
+  sortButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      sortButtons.forEach(function(item) { item.classList.remove('on'); });
+      button.classList.add('on');
+    });
+  });
+})();
+</script>
